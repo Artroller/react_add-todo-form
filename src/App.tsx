@@ -5,36 +5,7 @@ import './App.scss';
 import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
 
-export const UserInfo = ({ user }) => {
-  return (
-    <a className="UserInfo" href={`mailto:${user.email}`}>
-      {user.name}
-    </a>
-  );
-};
-
-export const TodoInfo = ({ todo }) => {
-  return (
-    <article
-      data-id={todo.id}
-      className={`TodoInfo ${todo.completed ? 'TodoInfo--completed' : ''}`}
-    >
-      <h2 className="TodoInfo__title">{todo.title}</h2>
-
-      <UserInfo user={todo.user} />
-    </article>
-  );
-};
-
-export const TodoList = ({ todos }) => {
-  return (
-    <section className="TodoList">
-      {todos.map(todo => (
-        <TodoInfo todo={todo} key={todo.id} />
-      ))}
-    </section>
-  );
-};
+import { TodoList } from './components/TodoList/TodoList';
 
 export const App = () => {
   const preparedTodos = todosFromServer.map(todo => ({
@@ -75,12 +46,7 @@ export const App = () => {
       title: title.trim(),
       userId: selectedUser.id,
       completed: false,
-      user: {
-        id: selectedUser.id,
-        name: selectedUser.name,
-        username: selectedUser.username,
-        email: selectedUser.email,
-      },
+      user: selectedUser,
     };
 
     setTodos(currentTodos => [...currentTodos, newTodo]);

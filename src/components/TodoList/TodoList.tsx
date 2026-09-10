@@ -12,7 +12,7 @@ type Todo = {
   id: number;
   title: string;
   completed: boolean;
-  user: User;
+  user: User | null;
 };
 
 type Props = {
@@ -21,10 +21,10 @@ type Props = {
 
 export const TodoList = ({ todos }: Props) => {
   return (
-    <div className="TodoList">
+    <section className="TodoList">
       {todos.map(todo => (
         <TodoInfo key={todo.id} todo={todo} />
       ))}
-    </div>
+    </section>
   );
 };

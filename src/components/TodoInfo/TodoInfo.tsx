@@ -12,7 +12,7 @@ type Todo = {
   id: number;
   title: string;
   completed: boolean;
-  user: User;
+  user: User | null;
 };
 
 type Props = {
@@ -23,10 +23,10 @@ export const TodoInfo = ({ todo }: Props) => {
   const completedClass = todo.completed ? ' TodoInfo--completed' : '';
 
   return (
-    <div className={`TodoInfo${completedClass}`}>
+    <article className={`TodoInfo${completedClass}`} data-id={todo.id}>
       <h2 className="TodoInfo__title">{todo.title}</h2>
 
-      <UserInfo user={todo.user} />
-    </div>
+      {todo.user && <UserInfo user={todo.user} />}
+    </article>
   );
 };
